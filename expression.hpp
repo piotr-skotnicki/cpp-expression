@@ -76,7 +76,7 @@ namespace expr
         }
 
     private:
-        Operation _op;
+        mutable Operation _op;
     };
 
     template <typename Operation>

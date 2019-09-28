@@ -26,7 +26,7 @@ std::transform(begin(a), end(a), begin(b), begin(c), _1 + _2);
 
 ```cpp
 int sum = 0;
-std::for_each(begin(v), end(v), variable(sum) += _1);
+std::for_each(begin(v), end(v), sum += _1);
 ```
 
 ```cpp

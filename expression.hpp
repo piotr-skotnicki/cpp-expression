@@ -33,8 +33,16 @@ namespace expr
 
         template <typename... Args>
             requires std::is_invocable_v<Operation&, Args&...>
-        constexpr decltype(auto) operator()(Args&&... args) const
+        constexpr decltype(auto) operator()(Args&&... args)
             noexcept(std::is_nothrow_invocable_v<Operation&, Args&...>)
+        {
+            return _op(args...);
+        }
+
+        template <typename... Args>
+            requires std::is_invocable_v<const Operation&, Args&...>
+        constexpr decltype(auto) operator()(Args&&... args) const
+            noexcept(std::is_nothrow_invocable_v<const Operation&, Args&...>)
         {
             return _op(args...);
         }
@@ -76,7 +84,7 @@ namespace expr
         }
 
     private:
-        mutable Operation _op;
+        Operation _op;
     };
 
     template <typename Operation>

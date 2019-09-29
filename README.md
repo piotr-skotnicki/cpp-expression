@@ -1,6 +1,9 @@
 cpp-expression
 ==============
 
+[![Try online](https://img.shields.io/badge/try-online-blue)](https://wandbox.org/permlink/Ee2lYrnrEnQr5H9f)
+[![MIT license](https://img.shields.io/github/license/piotr-skotnicki/cpp-expression)](./LICENSE)
+
 Introduction
 ------------
 
@@ -29,16 +32,16 @@ is not executed until a function call operator is applied:
 
 ```cpp
 auto lambda = std::cout << _1;
-lambda(3.14f); // prints 3.14f
+lambda(3.14f); // prints 3.14
 ```
 
 `expr::_1`, `expr::_2`, `...`, `expr::_7` (or just `_1`, `_2`) are so-called *placeholders* that represent an actual argument from a delayed function call, and themselves are delayed functions, that is:
 
 ```cpp
-_1(1, 2, 3, 4); // returns 1
-_2(1, 2, 3, 4); // returns 2
-_3(1, 2, 3, 4); // returns 3
-_4(1, 2, 3, 4); // returns 4
+_1('a', 'b', 'c', 'd'); // returns 'a'
+_2('a', 'b', 'c', 'd'); // returns 'b'
+_3('a', 'b', 'c', 'd'); // returns 'c'
+_4('a', 'b', 'c', 'd'); // returns 'd'
 ```
 
 `expr::variable` holds a reference to the wrapped object and itself is a delayed function, delegating any operation to that object:
@@ -58,7 +61,7 @@ auto lambda = std::cout << expr::constant('\n') << _1;
 
 Had `expr::constant` not been used, the compiler would first execute `std::cout << '\n'`, printing a new line character to the standard output, and then construct a delayed function of the form `std::cout << _1` (that is, without a leading new line character).
 
-> Hint: When in doubt, call the `expr::expressify(e)` helper function.
+> **Hint:** When in doubt, call the `expr::expressify(e)` helper function.
 
 `cpp-expression` allows short-circuit evaluation of operands, making the below code safe:
 

@@ -106,6 +106,8 @@ namespace expr
             : _var(std::addressof(var))
         {}
 
+        constexpr variable(const variable& rhs) = default;
+
         template <typename... Args>
         constexpr Type& operator()([[maybe_unused]] Args&&... args) const noexcept
         {
@@ -157,6 +159,8 @@ namespace expr
             requires std::is_move_constructible_v<Type>
             : _val(std::move(val))
         {}
+
+        constexpr constant(const constant& rhs) = default;
 
         template <typename... Args>
         constexpr const Type& operator()([[maybe_unused]] Args&&... args) const noexcept
@@ -215,6 +219,10 @@ namespace expr
     template <int I>
     struct placeholder
     {
+        constexpr placeholder() {}
+
+        constexpr placeholder(const placeholder& rhs) = default;
+
         template <typename... Args>
         constexpr decltype(auto) operator()(Args&&... args) const noexcept
         {

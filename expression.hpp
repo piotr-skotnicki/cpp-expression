@@ -237,13 +237,16 @@ namespace expr
     template <int I>
     inline constexpr bool is_expression<placeholder<I>> = true;
 
-    inline constexpr placeholder<0> _1 = {};
-    inline constexpr placeholder<1> _2 = {};
-    inline constexpr placeholder<2> _3 = {};
-    inline constexpr placeholder<3> _4 = {};
-    inline constexpr placeholder<4> _5 = {};
-    inline constexpr placeholder<5> _6 = {};
-    inline constexpr placeholder<6> _7 = {};
+    inline namespace placeholders
+    {
+        inline constexpr placeholder<0> _1 = {};
+        inline constexpr placeholder<1> _2 = {};
+        inline constexpr placeholder<2> _3 = {};
+        inline constexpr placeholder<3> _4 = {};
+        inline constexpr placeholder<4> _5 = {};
+        inline constexpr placeholder<5> _6 = {};
+        inline constexpr placeholder<6> _7 = {};
+    } // namespace placeholders
 
     template <typename Function, typename... Params>
     auto bind(Function&& func, Params&&... params)

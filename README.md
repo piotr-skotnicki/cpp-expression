@@ -1,7 +1,8 @@
 cpp-expression
 ==============
 
-[![Try online](https://img.shields.io/badge/try-online-blue)](https://wandbox.org/permlink/Ee2lYrnrEnQr5H9f)
+[![C++20](https://img.shields.io/badge/std-c%2B%2B2a-blue?logo=c%2B%2B)](https://isocpp.org)
+[![Try online](https://img.shields.io/badge/try-online-purple)](https://wandbox.org/permlink/mx280tEi20eU64Sy)
 [![MIT license](https://img.shields.io/github/license/piotr-skotnicki/cpp-expression)](./LICENSE)
 
 Introduction

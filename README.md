@@ -46,8 +46,8 @@ _4(1, 2, 3, 4); // returns 4
 ```cpp
 int i = 0;
 auto inc = ++expr::variable(i);
-inc(); // i equals 1
-inc(); // i equals 2
+inc(); // i now equals 1
+inc(); // i now equals 2
 ```
 
 `expr::constant` holds a copy of the passed object and itself is a delayed function, useful to overcome the problem of operator precedence:
@@ -58,7 +58,7 @@ auto lambda = std::cout << expr::constant('\n') << _1;
 
 Had `expr::constant` not been used, the compiler would first execute `std::cout << '\n'`, printing a new line character to the standard output, and then construct a delayed function of the form `std::cout << _1` (that is, without a leading new line character).
 
-> Hint: When in doubt, call the `expr::expressify(e)` helper function:
+> Hint: When in doubt, call the `expr::expressify(e)` helper function.
 
 `cpp-expression` allows short-circuit evaluation of operands, making the below code safe:
 

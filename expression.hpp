@@ -112,6 +112,11 @@ namespace expr
             return *_var;
         }
 
+        constexpr auto operator=(const variable& rhs) const
+        {
+            return operator=<const variable&>(rhs);
+        }
+
         template <typename Rhs>
         constexpr auto operator=(Rhs&& rhs) const
         {
@@ -157,6 +162,29 @@ namespace expr
         constexpr const Type& operator()([[maybe_unused]] Args&&... args) const noexcept
         {
             return _val;
+        }
+
+        constexpr auto operator=(const constant& rhs) const
+        {
+            return operator=<const constant&>(rhs);
+        }
+
+        template <typename Rhs>
+        constexpr auto operator=(Rhs&& rhs) const&
+        {
+            return expression([val = _val, rhs = expressify(std::forward<Rhs>(rhs))]
+                              (auto&&... args) -> decltype(auto) {
+                return val = rhs(args...);
+            });
+        }
+
+        template <typename Rhs>
+        constexpr auto operator=(Rhs&& rhs) &&
+        {
+            return expression([val = std::move(_val), rhs = expressify(std::forward<Rhs>(rhs))]
+                              (auto&&... args) -> decltype(auto) {
+                return val = rhs(args...);
+            });
         }
 
         template <typename Index>
@@ -221,6 +249,11 @@ namespace expr
                 static_assert(I < sizeof...(args), "Placeholder out of range");
                 return std::get<I>(std::tie(args...))[index(args...)];
             });
+        }
+
+        constexpr auto operator=(const placeholder& rhs) const
+        {
+            return operator=<const placeholder&>(rhs);
         }
 
         template <typename Rhs>
